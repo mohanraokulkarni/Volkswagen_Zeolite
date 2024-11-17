@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        /* Global Styles */
+        @import url("https://fonts.googleapis.com/css2?family=Mulish:wght@200..1000&display=swap");
+
+        :root {
+            --primary-color: #fe5b3e;
+            --text-dark: #ffffff;
+            --text-light: #ffffff;
+            --extra-light: #f2f2f2;
+            --white: #ffffff;
+            --gradient: linear-gradient(to bottom, #fe5c3c, #fc8023);
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Mulish", sans-serif;
+            background-color: #000000;
+            color: var(--text-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: #1a1a1a;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            width: 400px;
+            color: var(--text-light);
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--extra-light);
+        }
+
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border: 1px solid #333;
+            border-radius: 5px;
+            background-color: #2a2a2a;
+            color: var(--white);
+        }
+
+        input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 0.75rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            width: 100%;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #fc8023;
+            box-shadow: 0 0 20px #fc8023;
+        }
+
+        .forget {
+            margin-top: 0.5rem;
+            text-align: center;
+        }
+
+        .forget a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .forget a:hover {
+            color: #fc8023;
+            text-shadow: 0 0 20px #fc8023;
+            text-decoration: underline;
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .signup-link a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .signup-link a:hover {
+            color: #fc8023;
+            text-shadow: 0 0 20px #fc8023;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>LOGIN</h1>
+        <p>Log in to access your account.</p>
+        <form id="loginForm">
+            <input type="email" id="email" placeholder="Enter Email" required>
+            <input type="password" id="password" placeholder="Enter Your Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <div class="signup-link">
+            Not a member? <a href="signup.html">Signup Here</a>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for form submission and redirection
+        const form = document.getElementById('loginForm');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault(); // Prevent actual form submission
+
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            // Simulate login check (you can replace this with your backend logic)
+            if (email === "test@example.com" && password === "password123") {
+                alert("Login successful!");
+                window.location.href = "index.php"; // Redirect to home page
+            } else {
+                alert("Invalid email or password. Please try again.");
+            }
+        });
+    </script>
+</body>
+</html>

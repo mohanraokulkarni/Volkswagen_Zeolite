@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup Page</title>
+  <style>
+    /* Global Styles */
+    @import url("https://fonts.googleapis.com/css2?family=Mulish:wght@200..1000&display=swap");
+
+    :root {
+      --primary-color: #fe5b3e;
+      --text-dark: #ffffff;
+      --text-light: #ffffff;
+      --extra-light: #f2f2f2;
+      --white: #ffffff;
+      --max-width: 1200px;
+      --gradient: linear-gradient(to bottom, #fe5c3c, #fc8023);
+    }
+
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Mulish", sans-serif;
+      background-color: #000000;
+      color: var(--text-dark);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .signup-container {
+      width: 100%;
+      max-width: 400px;
+      background-color: #1a1a1a;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .signup-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .signup-header h1 {
+      font-size: 2rem;
+      color: var(--white);
+    }
+
+    .signup-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .signup-form label {
+      font-size: 1rem;
+      color: var(--text-light);
+    }
+
+    .signup-form input,
+    .signup-form select {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border-radius: 5px;
+      border: 1px solid #333;
+      background-color: #2a2a2a;
+      color: var(--white);
+    }
+
+    .signup-form input:focus,
+    .signup-form select:focus {
+      border-color: var(--primary-color);
+      outline: none;
+    }
+
+    .signup-form .btn {
+      width: 100%;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 5px;
+      background-color: var(--primary-color);
+      color: var(--white);
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .signup-form .btn:hover {
+      background-color: #fc8023;
+    }
+
+    .signup-form .message {
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+
+    .signup-form .message a {
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+
+    .signup-form .message a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="signup-container">
+    <div class="signup-header">
+      <h1>Create Account</h1>
+    </div>
+    <form class="signup-form" id="signupForm">
+      <label for="username">Username</label>
+      <input type="text" id="username" placeholder="Enter your username" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="Enter your email" required>
+
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="Enter your password" required>
+
+      <label for="confirmPassword">Confirm Password</label>
+      <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+
+      <!-- Car Model Dropdown -->
+      <label for="carModel">Car Model</label>
+      <select id="carModel" required>
+        <option value="" disabled selected>Select your car model</option>
+        <option value="Volkswagen ID4">Volkswagen ID4</option>
+        <option value="Volkswagen Golf">Volkswagen Golf</option>
+        <option value="Volkswagen Polo">Volkswagen Polo</option>
+        <option value="Volkswagen Passat">Volkswagen Passat</option>
+        <option value="Volkswagen Tiguan">Volkswagen Tiguan</option>
+        <option value="Volkswagen Jetta">Volkswagen Jetta</option>
+        <option value="Volkswagen Arteon">Volkswagen Arteon</option>
+      </select>
+
+      <!-- Car Number Plate Input -->
+      <label for="carNumberPlate">Car Number Plate(Format:- KA28EF8055)</label>
+      <input type="text" id="carNumberPlate" placeholder="Enter your car number plate" required>
+
+      <button type="submit" class="btn">Sign Up</button>
+      <p class="message">Already have an account? <a href="login.html">Log in</a></p>
+    </form>
+  </div>
+
+  <script>
+    // JavaScript for form validation and redirection
+    const form = document.getElementById('signupForm');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const username = document.getElementById('username').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+      const carModel = document.getElementById('carModel').value;
+      const carNumberPlate = document.getElementById('carNumberPlate').value;
+
+      if (password !== confirmPassword) {
+        alert('Passwords do not match.');
+        return;
+      }
+
+      if (password.length < 6) {
+        alert('Password must be at least 6 characters long.');
+        return;
+      }
+
+      if (!carModel) {
+        alert('Please select a car model.');
+        return;
+      }
+
+      if (!carNumberPlate) {
+        alert('Please enter your car number plate.');
+        return;
+      }
+
+      // Show success message and redirect to the login page
+      alert(`Signup successful! Welcome, ${username}!`);
+      form.reset(); // Clear the form
+      window.location.href = "login.html"; // Redirect to the login page
+    });
+  </script>
+</body>
+</html>

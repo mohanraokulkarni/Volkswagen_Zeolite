@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pick-Up Date</title>
+    <style>
+      body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #000000;
+        color: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .date-picker-container {
+        padding: 4.5rem;
+        background-color: #1a1a1a;
+        border-radius: 8px;
+        max-width: 600px;
+        width: 100%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 2rem;
+        color: #ffffff;
+        margin-bottom: 1.5rem;
+      }
+
+      label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+
+      input[type="date"] {
+        padding: 0.5rem;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        width: 100%;
+        margin-bottom: 1rem;
+      }
+
+      button {
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        color: black;
+        background-color: #ffffff;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #3c4286;
+
+      }
+
+      .message {
+        margin-top: 1rem;
+        font-size: 1rem;
+        color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="date-picker-container">
+      <h1>Select Pick-Up Date</h1>
+      <form id="dateForm">
+        <label for="pickUpDate">Pick-Up Date:</label>
+        <input type="date" id="pickUpDate" name="pickUpDate" required />
+        <button type="submit">Save Date</button>
+      </form>
+      <div class="message" id="message"></div>
+    </div>
+    <script>
+      document.getElementById("dateForm").addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const pickUpDate = document.getElementById("pickUpDate").value;
+        const messageElement = document.getElementById("message");
+
+        try {
+          // Send the selected date to the backend
+          const response = await fetch("update_pickup_date.php", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ pickUpDate }),
+          });
+
+          const result = await response.text();
+
+          if (response.ok) {
+            messageElement.textContent = result;
+            messageElement.style.color = "green";
+          } else {
+            messageElement.textContent = result || "Error updating date. Please try again.";
+            messageElement.style.color = "red";
+          }
+        } catch (error) {
+          messageElement.textContent = "An unexpected error occurred.";
+          messageElement.style.color = "red";
+        }
+      });
+    </script>
+  </body>
+</html>
